@@ -1,0 +1,915 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
+# See: https://circleci.com/docs/2.0/orb-intro/
+orbs:
+  # The python orb contains a set of prepackaged CircleCI configuration you can use repeatedly in your configuration files
+  # Orb commands and jobs help you with common scripting around a language/tool
+  # so you dont have to copy and paste it everywhere.
+  # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
+  python: circleci/python@1.5.0
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  build-and-test: # This is the name of the job, feel free to change it to better match what you're trying to do!
+    # These next lines defines a Docker executors: https://circleci.com/docs/2.0/executor-types/
+    # You can specify an image from Dockerhub or use one of the convenience images from CircleCI's Developer Hub
+    # A list of available CircleCI Docker convenience images are available here: https://circleci.com/developer/images/image/cimg/python
+    # The executor is the environment in which the steps below will be executed - below will use a python 3.10.2 container
+    # Change the version below to your required version of python
+    docker:
+      - image: cimg/python:3.10.2
+    # Checkout the code as the first step. This is a dedicated CircleCI step.
+    # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
+    # Here we're making sure we use just use the system-wide pip. By default it uses the project root's requirements.txt.
+    # Then run your tests!
+    # CircleCI will report the results back to your VCS provider.
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+          # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
+          # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
+      - run:
+          name: Run tests
+          # This assumes pytest is installed via the install-package step above
+          command: pytest
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    jobs:
+      - build-and-test
+
+
+
+import time: #for sleep
+from colorama import Fore: #for color
+import random: #for battles
+
+# game
+#MAKE SURE YOU INSTALL COLORAMA
+
+
+print('how to play- follow the questions and type the answers provided in caps. Y = yes, N = no')
+print('')
+time.sleep(4)  # sleep pauses the program for the time in the () for however many seconds you want
+print(' ')
+print(' ')
+print(' ')
+print(' ')
+print(' ')
+
+print(
+    'Welcome to the world of Pokémon! My name is Shrub! People call me the Pokémon Prof! This world is inhabited by '
+    'creatures called Pokémon!')
+print('')
+time.sleep(2)
+print('Before you begin on your adventure, tell me your name:')
+pname = input() #name yourself with this function
+print('Nice to meet you, ' + pname)
+
+time.sleep(4)
+
+print('Follow me! Your adventure awaits!')
+
+time.sleep(2)  # Sleep commands
+
+print(' ')
+print(' ')
+print(' ')
+
+print(' saving...')  # pausing
+
+time.sleep(3)
+
+print(' Save Complete!') #this is unneccesary but makes it feel like a game
+
+time.sleep(2)
+
+print(' ')
+print(' ')
+print(' ')
+# game start
+
+print(
+    'Mom: Wake up wake up wake up! Today is your big day! You are finally 10 years old! That means you get a pokémon '
+    'of your own!')
+
+time.sleep(2)
+
+print('')
+print('')
+# bedroom
+print(
+    '(You roll out of bed, drowsy from the night before. I guess its not a great idea  to stay up watching the '
+    'pokémon league until 12:00!)')
+print('')
+
+def input1():
+  user = input('What do you do? A=look around B=go downstairs. (type your answer directly after this colon):')
+
+  print('')
+  # a variety of different paths all leading to one outcome
+  if user.upper() == "B":
+      print('You walk down the creaky old stairs to the living room')
+  else:
+      print(
+          'You look around your room. There are pokémon posters along your walls, and your computer sits in one corner '
+          'of the room.')
+
+      time.sleep(2)
+      print('')
+      print('') #more inputs because I was not very good at coding when I started this project
+      user = input(
+          'You walk over to it. For some reason, it is already on. Wait, you can see instructions on it! Read? Y or N:')
+
+      if user.upper() == "Y":
+          print(
+              'Salutations! This is a note from the professor! Here are the instructions for Pokémon! Rule #1: always '
+              'type immediately after the question. Rule #2: Always answer with the options provided. Rule #3: Have fun '
+              'and catch them all!')
+      else:
+          print('Reluctantly, you walk down the creaky old stairs to the living room')
+input1()
+    # living room
+time.sleep(4)
+
+print('')
+print('')
+print('')
+print('')
+print('')
+print('')
+time.sleep(2)
+print('Mom: Finally youre downstairs! What was with the delay? Nevermind that. You got to go see Professor SHRUB!')
+
+time.sleep(2)
+def input2():
+  user = input('A: Look around B: Leave the house:')
+
+  print('')
+  # making sure you leave the house
+  if user.upper() == "B":
+      print('You take a step outside, ready to embark on an exciting Pokémon adventure!.')
+  else:
+      print('Mom: Get out already!')
+      user = input('A: Look around B: Leave the house:')
+
+      if user.upper() == "A": #I was going to make a loop, but I decided to make mom kick you out of the house.
+          print('Mom: Get OUT!')
+          time.sleep(3)
+          print('You take a step outside, ready to embark on an exciting Pokémon adventure!')
+      else:
+          print('You take a step outside, ready to embark on an exciting Pokémon adventure!')
+input2()
+
+# intro
+def intro():
+
+  print('')
+  print('')
+  time.sleep(1)
+  print('')
+  print('')
+  time.sleep(1)
+  print('')
+  print('')
+  time.sleep(1)
+  print('Beast8155 presents:')
+  print('')
+  print('')
+  time.sleep(1)
+  print('')
+  print('')
+  time.sleep(1)
+  print('')
+  print('')
+  time.sleep(1)
+  print('POKÉMON:')
+  print('') #this is a long intro for the aesthetic look
+  print('')
+  time.sleep(1)
+  print('Bland Gray')
+  time.sleep(5)
+  print('')
+  print('')
+  time.sleep(1)
+  print('')
+  print('')
+  time.sleep(1)
+  print('')
+  print('')
+  time.sleep(1)
+  print('')
+  print('')
+  time.sleep(1)
+  print('')
+  print('')
+  time.sleep(1)
+  print('')
+  print('')
+intro()
+# the start of the real game
+  
+def input3start():  
+  user = input("It is a bright, sunny day! As you step outside your house, you see the path that runs through your "
+              "town. A: Go up path B: Go down path:")
+  print('')
+
+
+  if user.upper() == "A":      # here I put an input inside of an input, # something i thought was genius at the time lol
+      
+      user = input('As you head up the dirt path, you notice a quaint little cottage to your right. A: Continue up the '
+                  'path B: Go to the house')
+      
+      if user.upper() == "A":#this might look a little confusing but i hope you can see that this is the second input
+          print('You reach the end of the town, where the grass grows long and nobody dares to venture.')
+      
+      else:
+          print('As you go inside the house, a boy comes up to greet you.')
+          time.sleep(2)
+          print('')
+          print('Are-E-an: Hey ' + pname) #run in with Are-E-an
+          time.sleep(3)
+          print('Are-E-an: Where are you going?')
+          time.sleep(2)
+          print('You: ...')
+          time.sleep(4)
+          print('Are-E-an: You wanna become a Pokémon master? I wish I could come. Mom wants me to do the dishes '
+                'though...')
+          time.sleep(4)
+          print('As you turn away from the house, you reach the end of the town, where the grass grows long and nobody '
+                'dares to venture.')
+  else:
+      print('You walk down the path to Prof SHRUBs lab. The door appears to be locked.')
+      print('')
+      time.sleep(3)
+      print('Deciding to turn back around, you reach the end of the town where the grass grows long and nobody dares to '
+            'venture. ')
+      print('')
+
+input3start()
+
+time.sleep(4)
+print('')
+def step():
+  user = input('Do you walk towards the grass or walk back to your house A: Grass B: Home:')
+  #Meeting the side character
+  if user.upper() == "A":
+      print('As you are about to take a step...')
+      time.sleep(3)
+      print('')
+      print('')
+      time.sleep(3)
+      print('')
+      print('')
+  else:
+      print('Well then, you basic little scrub. You decide to chicken out, becoming a failure in life and dying with many regrets.')
+      exit() #first wrong path
+step()
+
+time.sleep(2)
+print('')
+print('Lulu17: Wait! You are not going without me!')
+print('')
+time.sleep(4)
+print('Lulu17: I cannot believe you forgot! We were supposed to go catch pokemon today!')
+print('')
+time.sleep(3)
+print('Oops! You were supposed to go on a date with Lulu today. It must have slipped your mind. You are a terrible friend.')
+time.sleep(3)
+print('')
+print('')
+time.sleep(1)
+#Here's some more illusion of choice with an empty question. Its main purpose is to slow down the code from getting to far ahead of itself
+def apologize():
+  user = input('What do you do: A = Sincerely apologize, B = Mention that it is your birthday:')
+  if user.upper() == "A":
+    print('You: ...')
+
+  else: 
+    print('You: ...')
+  time.sleep(4)
+  print('')
+  print('')
+  print('Lulu: Well I could give you an exception since its your birthday... Lets just go catch a pokémon!')
+  time.sleep(4)
+  print('')
+  print('')
+  print('About to embark on an amazing adventure, you take a BIG FAT step into the tall grass.')
+  time.sleep(3)
+  print('As you are about to take your second step...')
+  time.sleep(2)
+  print('')
+  time.sleep(2)
+  print('')
+  print('Prof SHRUB: WAIT! Its not safe to go alone!')
+  print('')
+  time.sleep(4)
+  print('SHRUB: (wheeze) I just...ran here (wheeze) and couldnt... (wheeze) let you go...(wheeze) without...a ('
+            'wheeze) pokémon!')
+  time.sleep(3)
+  print('')
+apologize()
+
+def labb():
+  while True:
+    user = input('Follow me to my lab! Press A to continue:')
+    if user.upper() == "A":
+      def lab1():
+        #i did this function so that it would shorten my time doing the else part
+        time.sleep(2)
+        print('saving...')
+        time.sleep(3.5)
+        print('Save Complete!')
+        print('')
+        time.sleep(1)
+        print('')
+        print('')
+        time.sleep(1)
+        print('')
+        print('')
+        time.sleep(1)
+        print('You enter the BIG, bulky, white, serene, enticing, awesome, fluorescent, and AWESOME lab!')
+        time.sleep(3)
+        print('')
+        print('SHRUB: As I said before, you NEED a pokémon to safely leave this town! (Also so that I dont get sued)')
+        print('')
+        time.sleep(3)
+        print('')
+        print('Just then, your childhood rival walks in, aNdYrOo')
+        time.sleep(3)
+        print('aNd: Hey I want a pokémon too!')
+        time.sleep(4)
+        print('')
+        print('')
+        print('SHRUB: Ugh... fine...........I cant believe your mom left me with you.....')
+        time.sleep(2.5)
+        print('')
+        print('aNd: ~we like to troll~') #andrew wanted me to put this line in smh
+        time.sleep(2)
+        print('')
+        print('')
+        print('SHRUB: (sigh) These are some of the pokemon that I have collected along my travels. Pick one, ' + pname) #this types ur name
+        time.sleep(2)
+        print('')
+        print('')
+      lab1()
+      break #exiting loop
+    
+
+
+
+    else: #yea you have to follow him otherwise you are stuck in a loop
+      print('Well we can just wait here then!')
+      time.sleep(4) #yea the user has to stay in this loop until they are ready
+
+labb()
+
+
+#BIG POKEMON DECISION
+print('3 Pokéballs shine in front of you. This is the big moment you have been waiting for!')
+time.sleep(3)
+def pokeballs():
+  user = input('Do you A: take the pokemon first or do you B: let Lulu17 pick first?')
+  #you can pick either choice through this simple input function, affecting the order in which the pokemon are recieved to their owners but not who gets the pokemon
+  if user.upper() == "A": # COLORS
+      print('As you are about to grab the first ball, aNdYrOo grabs it!')
+      time.sleep(2)
+      print('')
+      print('aNd: You were taking too long. WOW! It turns out this is an ' + Fore.YELLOW + 'ARCEUS,' + Fore.RESET + ' the '
+                                                                                                                  'GOD '
+                                                                                                                  'OF '
+                                                                                                                  'POKEMON') # i love colors :)
+      time.sleep(3)
+      print('')
+      print('You are in utter shock. So close to the best pokemon, but so far.')
+      time.sleep(4)
+      print('')
+      print('Lulu17: Well, I guess I will just go next')
+      time.sleep(3)
+      print('')
+      print('She goes up and picks a ball. It turns out it was a ' + Fore.MAGENTA + 'MEW,' + Fore.RESET + ', one of the strongest pokemon to ever exist!') #magenta looks so cool
+      time.sleep(3)
+      print('Lulu17: WOW its so cute! Pick yours now ' + pname)
+  else: #again, this affects the order, not who gets who
+      print('She goes up and picks a ball. It turns out it was a ' + Fore.MAGENTA + 'MEW' + Fore.RESET + ' one of the strongest pokemon to ever exist!') #magenta
+      time.sleep(2)
+      print('Lulu17: WOW its so cute! Pick yours now ' + pname)
+      time.sleep(2)
+      print('')
+      print('This is it! Your hand starts reaching towards the pokeball when...')
+      time.sleep(3)
+      print('')
+      print('')
+      print('aNdYrOo grabs it!')
+      print('')
+      time.sleep(2)
+      print('aNd: ' + Fore.YELLOW + 'ARCEUS?' + Fore.RESET +  ' man I wanted a better one...') #yellow bc there was no gold
+      print("I GUESS I'll take it...")
+      time.sleep(2.5)
+      print('')
+      print('')
+      print('')
+      print('What a missed chance! At least you can get the last pokemon.')
+pokeballs()
+#this is just a bunch of storyline and stuff bc its the intro. sorry if its boring
+time.sleep(5)
+print('You place your hand on the pokeball. It gleams under the lights and it is relatively cold to the touch. This '
+      'will be your partner.')
+time.sleep(5)
+print('')
+print('')
+print('You open the pokeball.')
+print('')
+time.sleep(1)
+print('')
+time.sleep(1)
+print('')
+time.sleep(1)
+print('You got a ' + Fore.LIGHTBLACK_EX + 'ZUBAT!' + Fore.RESET) # (._.) a zubat. I tried to find the lamest color. 
+time.sleep(3)
+print('Your disappointment is immeasurable and your day is ruined')
+time.sleep(5)
+print('')
+print('SHRUB: Oh. Honestly I forgot he was in there. Oh well. You guys all have really good pokemon! Test them out!')
+print('')
+time.sleep(4.5)
+print('You challenged aNdYrOo!')
+time.sleep(2)
+print('You: Go, ZUBAT!')
+time.sleep(2)
+print('aNd: Go, Arceus... I guess')
+time.sleep(2)
+#You lose either way because when I started coding this I had no idea how to make a battle system. Also it makes room for pokemon development. It just uses basic inputs with a universal output
+
+def fightt():
+  user = input('Do you fight? A = Yes B = No')
+
+  if user.upper() =="A": #fight options
+      print('You: Use TACKLE!')
+      time.sleep(3)
+      print('That move does not affect the oponnents pokemon.')
+      time.sleep(4)
+      print('You: bRuH')
+      time.sleep(2)
+      print('')
+      print('aNd: ARCEUS, use HOLY SOLAR BEAM!')
+      time.sleep(4)
+      print('')
+      print('It is super effective! Critical hit! ZUBAT was burned by HOLY SOLAR BEAM! ZUBAT fainted and is in critical condition!')
+      time.sleep(4)
+      print('')
+      print('SHRUB: Well that was a fair fight! You should probably heal your pokemon before it dies of blood loss!')
+      time.sleep(3.5)
+  else: #you lose either way so you can get stronger in the end and beat aNd
+      print('aNd: ARCEUS, use HOLY SOLAR BEAM!')
+      time.sleep(4)
+      print(
+          'It is super effective! Critical hit! ZUBAT was burned by HOLY SOLAR BEAM! ZUBAT fainted and is in critical condition!')
+      time.sleep(4)
+      print('')
+      print('SHRUB: Well that was a fair fight! You should probably heal your pokemon before it dies of blood loss!')
+      time.sleep(4)
+      print('')
+      print('')
+      print('')
+      print("aNd: rekt")
+  time.sleep(3.5)
+
+  print('You blacked out!')
+
+fightt()
+#this is where the chapters start
+def chapter1intro():
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+  print('')
+  print('Chapter 1:') #well isn't this a fun intro
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+  print('A Stale Beginning!')
+  time.sleep(3)
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+  print('')
+  time.sleep(1)
+chapter1intro() 
+
+#now that the intro is over, we start the real adventure with better code
+print("You awaken, and the sky seems to be moving?! You quickly sit up and notice that you, Lulu, and aNd are on top of a RYHORN!")
+print('')
+time.sleep(2)
+print("Lulu: Finally you are awake! You've been asleep for 3 whole days.")
+time.sleep(2)
+# loopedy loop
+
+def loopedyloop():
+  while True:
+      user = input('A: Where are we going? '
+                  'B: Why was I asleep? '
+                  'C: Why are we on a RYHORN? ')
+      if user.upper() =="A": #this is the only "if" possibility that breaks the loop's cycle
+          time.sleep(1.5)
+          print('')
+          print('')
+          print("aNd: We're headed to the nearest volcano to catch some fire pokemon! I'm looking for some torchics and some OTHER hot chicks ;)")
+          time.sleep(2)
+          print("Lulu: Yea btw, aNdYroo decided to stick around just to 'troll' you.")
+          break #exit loop
+      elif user.upper() =="B":
+          time.sleep(1.5)
+          print('')
+          print('')
+          print("aNd: You got beat by ME so hard that you passed out like a loser! I guess my pokemon is just better ")
+          time.sleep(10)
+          print('')
+          print('aNd: lol')
+          time.sleep(2)
+          #back to the question to get a desired answer
+      else:
+          time.sleep(1.5)
+          print('')
+          print('')
+          print("Lulu: Well, we had to leave to get started on our adventure and couldn't wait for you to wake up!")
+          #back to the question
+loopedyloop()
+time.sleep(3)
+print('')
+print('')
+print("As you gaze up at the fiery volcano in front of you, you can't help but feel a twinge of fear")
+time.sleep(3.5)
+print('')
+print('')
+print("...you're also hoping you brought a change of underwear...")
+print('')
+print('')
+
+#i just realized that I could save a ton of time with this function
+
+def transition():
+
+  time.sleep(1.5)
+  print('')
+  time.sleep(1.5)
+  print('')
+  time.sleep(1.5)
+  print('')
+transition()
+
+#mountain's base town
+
+def coalcity():
+
+  user = input('After a few days, you and your team reach the base of the volcano, entering ' + Fore.RED + 'COAL CITY' + Fore.RESET + '!' "Do you want to go forward: A, go back: B, or stay put: C")
+
+  if user.upper()=="A":
+      time.sleep(2)
+      print('You and your friends enter the settlement, and the townsfolk give you weird looks as you pass by the houses.')
+      #yay you picked the right one! you won't die
+    
+  elif user.upper()=="B":
+      time.sleep(2)
+      print("As you and your friends turn around to head back, the earth starts shaking. It's an earthquake! The ground starts cracking and giant holes open up. The RHYHORN is thrown off balance and Lulu and the RHYHORN fall to their deaths!") 
+      time.sleep(4)
+      print("You barely hang on to the edge of the jagged hole as aNdYrOo is unscathed at the top.")
+      time.sleep(3)
+      print("aNd: Long...")
+      time.sleep(1.5)
+      print("aNd: Live...")
+      time.sleep(1.5)
+      print("aNd: The...")
+      time.sleep(1.5)
+      print( Fore.BLUE + "KING!" + Fore.RESET)
+      print('')
+      print('')
+      time.sleep(2)
+      print('')
+      print('Yeah, you a dead boi')
+      print('')
+      exit() #these are permanant endings because it exits the code
+  else: 
+      time.sleep(2)
+      print('Days pass, hours pass, and you do not move. Eventually you and your friends die, and are a constant reminder to passerby to continue their pokemon adventures, lest they desire to face the consequences... ')
+      exit() #kill code with stoopid ending here
+    
+coalcity()
+
+transition() #yay i saved time with the function
+
+print('You and your friends soon reach a dojo, and decide to ask for directions in there.')
+print('')
+time.sleep(4)
+print('')
+print('HOSAKU: Hello my name is HOSAKU, but you can call me the bug master!')
+time.sleep(4)
+print('')
+print('You: ...')
+print('')
+time.sleep(4)
+print('HOSAKU: Ah, looking for directions are we? Well, the fire pokemon master, TUBS, lives on top of that mountain.')
+time.sleep(5)
+print('I can only show you how to get there if you beat me in a Pokemon battle!')
+
+#lets a goooooo
+def battleintro():
+  time.sleep(1.5)
+  print('')
+  time.sleep(1.5)
+  print('')
+  print('duh nuh nuh nuh nuh nuh nuuuuuuh') #epic sound effect
+  print('')
+  time.sleep(1.5)
+  print('You were challenged to a Pokemon Battle!')
+  print('')
+  time.sleep(1.5)
+battleintro() #gonna need this intro for later
+print('HOSAKU: Go, ' + Fore.MAGENTA + 'GENESECT' + Fore.RESET)
+#wOuLd YoU LiKe A pOkEdEx EnTrY? (uses a user input)
+print('')
+
+def genesect():
+
+  user = input('Would you like to scan this Pokemon? Y or N:')
+
+  if user.upper()== "Y":
+    print('')
+    print('GENESECT, a BUG-STEEL Pokemon. Species: Paleozoic. This Pokémon existed 300 million years ago. Team Plasma altered it and attached a cannon to its back.')
+    print('')
+    print('')
+    time.sleep(4)
+    print('')
+
+  else: # :(
+    print('Ok ok, geez I was just trying to be helpful.')
+    time.sleep(2)
+    print('')
+genesect()
+
+def bugbattle():
+  #bug catcher
+  #for harder ppl make the range 10-30
+  #this is some hp stuff and defining variables
+  my_hp = 100#my hp
+  mo_hp = 100 #their hp
+  my_dmg = (25)  #my damage is constant   
+  mo_dmg = random.randrange(10, 25) #theirs is set at random
+  print('You: Go, ' + Fore.LIGHTBLACK_EX + 'ZUBAT!' + Fore.RESET)
+  
+  while True:
+          
+          if mo_hp <= 0:#this will end the loop of attacks if the other pokemon dies
+              print('The opposing Pokemon fainted!!')
+              break
+          elif my_hp <= 0: #this will kill the code if zubat dies
+              print('You blacked out!')
+              time.sleep(4)
+              print('')
+              print('You wake up back home, in your warm bed, knowing it was all a dream. Your mom comes into the room.')
+              time.sleep(4)
+              print('')
+              print('')
+              print('Mom: Wake up wake up wake up! Today is your big day! You are finally 10 years old! That means you get a pokémon ' #hmmmmm, seems familiar...
+                  'of your own!')
+              exit() #kills code
+              break
+          else: #this took me a while to sort out elif else and if so I had to look it up
+            print ("Choices: ")
+            print ("1 - Tackle")
+            print ("2 - Curl up in a ball and cry")
+            print('')
+            choice = input ("Enter your selection. ")
+            choice = float(choice)
+            print('')
+          if choice == 1: #it will pump this out if you attack
+            mo_hp = mo_hp - my_dmg #subtracting their my damage from their hp
+            print('')
+            print ("Other Pokemon HP: ", mo_hp,)
+            print ("You did ", my_dmg, "damage!")
+            print('')
+            my_hp = my_hp - mo_dmg
+            print('')
+            print("The opposing Pokemon did ", mo_dmg," damage!")
+            print ("Your HP: ", my_hp)
+            print('')
+            print('')
+          elif choice == 2: #it will pump this out if you cry
+            mo_hp = mo_hp - 10 #quick maths
+            print('')
+            print( "Other Pokemon HP: ", mo_hp,)
+            print ("You did ", 10, "damage with your contagious depression!")
+            print('')
+            my_hp = my_hp - mo_dmg / 2 #you are curled up so their damage is halved. 
+            print ("The opposing Pokemon did ", mo_dmg / 2," damage!")
+            print ("Your HP: ", my_hp)
+            print('')
+            print('')
+bugbattle() #<-- thats the function name
+
+time.sleep(2)
+print('')
+print('HOKASU: Rats!')
+time.sleep(1.5)
+print('')
+print('You got $100 for winning!')
+print('')
+print('')
+time.sleep(3)
+def ad(): #honey sponsorship of course 
+  print("Thief: That's mine! HA!")
+  print('')
+  time.sleep(2.5)
+  print('Your money was just stolen!')
+  print('')
+  time.sleep(4)
+  print('aNd: We should have saved our money from that thief, just like how honey can save YOU lots of money.')
+  time.sleep(4)
+  print('')
+  print('') #ad read for comedic relief
+  print("Honey is a free browser add on available on Google, Opera, Firefox, Safari, if it’s a browser it has Honey. Honey automatically saves you money when you checkout on sites Like Amazon. Papa John's. Kohl's. Wherever you shop it's a good chance that honey can save you money. All you have to do when you're checking out at these major sites click that little orange button and it will scan the entire internet And find discount codes for you. It takes two clicks to install Honey. Now anytime you checkout honey will scan the entire internet and find coupon codes for you. If there is a coupon code they will find it, and if there’s not a coupon code you can rest assured that you are getting the best price possible and there literally is not one available on the internet. If you install Honey right now you can save like 50 to 100 dollars on your Christmas shopping, doing nothing. There’s literally no reason not to install Honey, it takes two clicks, 10 million people use it, 100,000 5 star reviews, unless you hate money you should install Honey. If you want to install it just go to joinhoney.com/pokemon, that’s joinhoney.com/pokemon.")
+ad()
+
+print('')
+print('')
+time.sleep(8)
+
+
+print('Lulu: Guys! While you were talking about honey or whatever, he gave me a map! We have to travel up Lava Lake Path to get to TUBS!')
+time.sleep(2)
+print('')
+
+def savee():
+
+  while True: #this is just a checkpoint for the player to take in whats happenning
+
+    user = input("Continue Game? Y or N:")
+    if user.upper() == "Y":
+      print('')
+      print('')
+      print('saving...')
+      time.sleep(3)
+      print('Save complete!')
+      time.sleep(3)
+      break #end loop
+    else: #i dont think they want to stop, do they? ill ask the question again. and again. and again. and again. and again. and again.
+      print('')
+      print("Hmmmmm... I don't think you want to lose your progress, do you?")
+savee()
+
+print('')
+print('')
+print('You stare up at the volcano, looking more ominous than ever, and take your first steps up Lava Lake Path.   ')
+time.sleep(1.5)
+print('')
+print('')
+transition()
+#transition
+print('You and your friends have been climbing for hours. You barely reach the top when you spot him. TUBS, the fire pokemon MASTER')
+
+time.sleep(3)
+
+print('TUBS: I see you are exhausted...')
+
+time.sleep(4)
+print('')
+print('TUBS: Great! Lets Battle!')
+print('')
+print('TUBS: Go, ' + Fore.RED + 'INCINEROAR' + Fore.RESET + '!')
+def bigbattle():
+  #TUBS
+  #for harder ppl make the range 10-30
+  #this is some hp stuff and defining variables
+  my_hp = 100#my hp
+  mo_hp = 200 #their hp
+  my_dmg = (25)  #my damage is constant   
+  mo_dmg = random.randrange(10, 21) #theirs is set at random
+  print('You: Go, ' + Fore.LIGHTBLACK_EX + 'ZUBAT!' + Fore.RESET)
+  
+  while True:
+          
+          if mo_hp <= 0:#this will end the loop of attacks if the other pokemon dies
+              print('The opposing Pokemon fainted!!')
+              break
+          elif my_hp <= 0: #this will kill the code if zubat dies
+              print('You blacked out!')
+              time.sleep(4)
+              print('')
+              print('You wake up back home, in your warm bed, knowing it was all a dream. Your mom comes into the room.')
+              time.sleep(4)
+              print('')
+              print('')
+              print('Mom: Wake up wake up wake up! Today is your big day! You are finally 10 years old! That means you get a pokémon ' #hmmmmm, seems familiar...
+                  'of your own!')
+              exit() #kills code
+              break
+          else: #this took me a while to sort out elif else and if so I had to look it up
+            print ("Choices: ")
+            print ("1 - Tackle")
+            print ("2 - Curl up in a ball and cry")
+            print('')
+            choice = input ("Enter your selection. ")
+            choice = float(choice)
+            print('')
+          if choice == 1: #it will pump this out if you attack
+            mo_hp = mo_hp - my_dmg #subtracting their my damage from their hp
+            print('')
+            print ("Other Pokemon HP: ", mo_hp,)
+            print ("You did ", my_dmg, "damage!")
+            print('')
+            my_hp = my_hp - mo_dmg
+            print('')
+            print("The opposing Pokemon did ", mo_dmg," damage!")
+            print ("Your HP: ", my_hp)
+            print('')
+            print('')
+          elif choice == 2: #it will pump this out if you cry
+            mo_hp = mo_hp - 10 #quick maths
+            print('')
+            print( "Other Pokemon HP: ", mo_hp,)
+            print ("You did ", 10, "damage with your contagious depression!")
+            print('')
+            my_hp = my_hp - mo_dmg / 2 #you are curled up so their damage is halved. 
+            print ("The opposing Pokemon did ", mo_dmg / 2," damage!")
+            print ("Your HP: ", my_hp)
+            print('')
+            print('')
+bigbattle() #<-- thats the function name
+
+transition()
+
+print('TUBS: No...How could I lose...')
+print('')
+print('')
+time.sleep(2)
+print("TUBS: Please, take my money. Just don't take the badge. It's all I have left...")
+time.sleep(2)
+print('')
+print('Lulu: ...')
+print('')
+print('')
+time.sleep(2)
+print('Lulu grabs his $200, grabs the badge, and kicks TUBS into the volcano!')
+time.sleep(3)
+print('aNd: ...')
+print("aNd: Wow okay you can chill. Anyway~")
+print('')
+time.sleep(2)
+print('')
+
+def pAy():
+
+  user = input('You have reached the end of the demo! Continue for just $39.99? Y or N:')
+
+  if user.upper() == "Y":
+    print('')
+    print('Great! Plus taxes thats a small total of $146.99!')
+    print('')
+    time.sleep(2)
+    print('processing...')
+    print('')
+    print('your card was declined.')
+    exit() 
+  else:
+    print('processing...')
+    print('')
+    print('game over.')
+    exit() 
+pAy()
+
+
+
+
+
+
+
+
+
+
